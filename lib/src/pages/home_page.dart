@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poc_flutter/src/providers/menu_provider.dart';
 
 class HomePage extends StatelessWidget {
   final listado = ['aaaa', 'bbbb', 'cccc'];
@@ -23,6 +24,7 @@ class HomePage extends StatelessWidget {
 // el tipo de retorno pordría ser un "Widget", ya que el "body" del Scaffold
 // recibe todo lo herede de él, incluyendolo :)
   ListView _lista() {
+    print(menuProvider.opciones);
     return ListView(children: _listadoMenu());
   }
 
