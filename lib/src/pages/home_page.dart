@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poc_flutter/src/pages/alert_page.dart';
 import 'package:poc_flutter/src/providers/menu_provider.dart';
 import 'package:poc_flutter/src/util/icon_str.dart';
 
@@ -28,12 +29,12 @@ class HomePage extends StatelessWidget {
       future: menuProvider.cargarDatosMenu(),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-        return ListView(children: _listadoMenu(snapshot.data));
+        return ListView(children: _listadoMenu(snapshot.data, context));
       },
     );
   }
 
-  List<Widget> _listadoMenu(List<dynamic> listado) {
+  List<Widget> _listadoMenu(List<dynamic> listado, BuildContext context) {
     return listado
         .map((item) => Column(
               children: <Widget>[
@@ -43,7 +44,11 @@ class HomePage extends StatelessWidget {
                   leading:
                       getIcon(item['icon']), //leading es un elemento al inicio
                   trailing: Icon(Icons.keyboard_arrow_right),
-                  onTap: () => {},
+                  onTap: () {
+                    final ruta = MaterialPageRoute(
+                        builder: (context) => EjemploAlerta());
+                    Navigator.push(context, ruta);
+                  },
                 ),
                 Divider()
               ],
