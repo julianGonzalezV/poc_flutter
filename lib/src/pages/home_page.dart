@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:poc_flutter/src/pages/alert_page.dart';
 import 'package:poc_flutter/src/providers/menu_provider.dart';
 import 'package:poc_flutter/src/util/icon_str.dart';
 
 class HomePage extends StatelessWidget {
-  TextStyle estiloTexto = new TextStyle(fontSize: 30);
+  final TextStyle estiloTexto = new TextStyle(fontSize: 30);
   @override
   Widget build(BuildContext context) {
     // Flutter io : Saffold is an elemente that full

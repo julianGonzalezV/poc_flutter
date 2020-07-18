@@ -1,29 +1,13 @@
 import 'package:flutter/material.dart';
 
-/*
-* Home temporal o Version 1.0.0 para entender la evolcución, PERO EL HOME REAL ES
-* home_page.dart
-*/
+/// Home temporal o Version 1.0.0 para entender la evolcución, PERO EL HOME REAL ES
+/// home_page.dart
 class HomePageV1 extends StatelessWidget {
   final listado = [
     'aaaa',
     'bbbb',
     'cccc'
   ]; // final porque estamos en un StatelessWidget
-
-  List<Widget> _listaHomeImperativo() {
-    List<Widget> listResult = [];
-    for (var item in listado) {
-      /*listResult.add(ListTile(
-        title: Text(item),
-      ));
-      listResult.add(Divider());*/
-
-      // One line and composition
-      listResult..add(ListTile(title: Text(item)))..add(Divider());
-    }
-    return listResult;
-  }
 
   List<Widget> _listaHomeDeclarativo() {
     return listado
@@ -43,7 +27,7 @@ class HomePageV1 extends StatelessWidget {
         .toList();
   }
 
-  TextStyle estiloTexto = new TextStyle(fontSize: 30);
+  final TextStyle estiloTexto = new TextStyle(fontSize: 30);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

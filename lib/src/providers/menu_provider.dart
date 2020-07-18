@@ -6,7 +6,7 @@ import 'package:flutter/services.dart' show rootBundle;
 class _MenuProvider {
   List<dynamic> opciones = [];
 
-  _MenuProvider() {}
+  _MenuProvider();
 
   /// _cargarMenu
   /// Se realiza cambio a async dado que cuando se llamaba desde home_page
