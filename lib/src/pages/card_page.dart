@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class CardPage extends StatelessWidget {
   _tarjetaSencilla() {
     return Card(
+      elevation: 10,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -29,7 +31,7 @@ class CardPage extends StatelessWidget {
   /// tarjeta normal con imagen: Note que Flutter queda esperando para cargar
   /// e incluso se muestra primero el texto "Imagen.."
   _tarjetaConImagen() {
-    return Card(
+    final tarjeta = Container(
       child: Column(
         children: <Widget>[
           Image(
@@ -37,11 +39,27 @@ class CardPage extends StatelessWidget {
                   'https://live.staticflickr.com/878/40291533535_8bbfa6657f_b.jpg')),
           Container(
             child: Text('Imagen...'),
-            padding: EdgeInsets.all(30.0),
+            padding: EdgeInsets.all(10.0),
           )
         ],
       ),
     );
+
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30.0),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10.0,
+                  spreadRadius: 2.0,
+                  offset: Offset(2.0, 10.0))
+            ]),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30.0),
+          child: tarjeta,
+        ));
   }
 
   /// A diferencia de _tarjetaConImagen() este muestra una imagen previa mientas carga
@@ -68,6 +86,10 @@ class CardPage extends StatelessWidget {
         _tarjetaSencilla(),
         _tarjetaConImagen(),
         _tarjetaConFadeImagen(),
+        _tarjetaConImagen(),
+        _tarjetaConImagen(),
+        _tarjetaConImagen(),
+        _tarjetaConImagen(),
       ],
       padding: EdgeInsets.all(40.0),
     );
