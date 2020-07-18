@@ -21,5 +21,10 @@
             "icon": "folder_open",
             "texto": "4. Tarjetas"
         }
+        ,{
+            "ruta": "inputs",
+            "icon": "input",
+            "texto": "5. Campos de entrada (email, pd, date ..etc)"
+        }
     ]
 }
