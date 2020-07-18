@@ -27,7 +27,7 @@ class _ContadorPageState extends State<ContadorPage> {
     // and drawers(lateral Menu)
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contador2'),
+        title: Text('Ejemplo Contador'),
         centerTitle: true,
       ),
       body: Center(
@@ -52,15 +52,15 @@ class _ContadorPageState extends State<ContadorPage> {
     return Row(children: [
       SizedBox(width: 30.0),
       FloatingActionButton(
-          heroTag: toString(),
+          heroTag: '_resetear',
           child: Icon(Icons.settings_backup_restore),
           onPressed: _resetear),
       Expanded(child: Container(height: 100)),
       FloatingActionButton(
-          heroTag: toString(), child: Icon(Icons.remove), onPressed: _restar),
+          heroTag: '_restar', child: Icon(Icons.remove), onPressed: _restar),
       SizedBox(width: 7.0),
       FloatingActionButton(
-          heroTag: toString(), child: Icon(Icons.add), onPressed: _agregar)
+          heroTag: '_agregar', child: Icon(Icons.add), onPressed: _agregar)
       //IMPORTANTE! note como no se llama _agregar() con parentesis, se pasa la referencia, especie de lazy
       // para que quede en la definicion pero no se ejecuta sino hasta que se
       // hace el evento Press
