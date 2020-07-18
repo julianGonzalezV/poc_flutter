@@ -52,11 +52,15 @@ class _ContadorPageState extends State<ContadorPage> {
     return Row(children: [
       SizedBox(width: 30.0),
       FloatingActionButton(
-          child: Icon(Icons.settings_backup_restore), onPressed: _resetear),
+          heroTag: toString(),
+          child: Icon(Icons.settings_backup_restore),
+          onPressed: _resetear),
       Expanded(child: Container(height: 100)),
-      FloatingActionButton(child: Icon(Icons.remove), onPressed: _restar),
+      FloatingActionButton(
+          heroTag: toString(), child: Icon(Icons.remove), onPressed: _restar),
       SizedBox(width: 7.0),
-      FloatingActionButton(child: Icon(Icons.add), onPressed: _agregar)
+      FloatingActionButton(
+          heroTag: toString(), child: Icon(Icons.add), onPressed: _agregar)
       //IMPORTANTE! note como no se llama _agregar() con parentesis, se pasa la referencia, especie de lazy
       // para que quede en la definicion pero no se ejecuta sino hasta que se
       // hace el evento Press

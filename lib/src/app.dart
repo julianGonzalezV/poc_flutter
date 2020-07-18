@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poc_flutter/src/pages/alert_page.dart';
-import 'package:poc_flutter/src/pages/avatar_page.dart';
-import 'package:poc_flutter/src/pages/contador_page.dart';
-import 'package:poc_flutter/src/pages/home_page.dart';
+import 'package:poc_flutter/src/routes/routes.dart';
 
 class PruebaConcepto extends StatelessWidget {
   @override
@@ -12,11 +10,14 @@ class PruebaConcepto extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        '/': (BuildContext context) => HomePage(),
-        'alert': (BuildContext context) => EjemploAlerta(),
-        'avatar': (BuildContext context) => EjemploAvatar(),
-        'whatch': (BuildContext context) => ContadorPage(),
+      routes: appRoutes(),
+
+      /// cuando las rutas d arriba no se encuentra una nueva entonces podemos
+      /// tener el onGenerateRoute, que direcciona a la que le digamos por defecto
+      /// que tal que sea un mensaje de "pagina en construcción?""
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(
+            builder: (BuildContext context) => EjemploAlerta());
       },
     );
   }

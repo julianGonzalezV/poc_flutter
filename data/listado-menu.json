@@ -17,7 +17,7 @@
             "texto": "3. Avatars"
         },
         {
-            "opcion": "card",
+            "ruta": "card",
             "icon": "folder_open",
             "texto": "4. Cards"
         }
