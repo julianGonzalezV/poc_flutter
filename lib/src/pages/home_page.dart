@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:poc_flutter/src/providers/menu_provider.dart';
+import 'package:poc_flutter/src/util/icon_str.dart';
 
 class HomePage extends StatelessWidget {
-  final listado = ['aaaa', 'bbbb', 'cccc'];
-
   TextStyle estiloTexto = new TextStyle(fontSize: 30);
   @override
   Widget build(BuildContext context) {
@@ -23,20 +22,26 @@ class HomePage extends StatelessWidget {
 // Dado que LisView en el arbol de herencia resulta ser un Widget entonces
 // el tipo de retorno pordría ser un "Widget", ya que el "body" del Scaffold
 // recibe todo lo herede de él, incluyendolo :)
-  ListView _lista() {
-    print(menuProvider.opciones);
-    return ListView(children: _listadoMenu());
+  Widget _lista() {
+    //menuProvider.cargarDatosMenu().then((listadoMenu) {
+    return FutureBuilder(
+      future: menuProvider.cargarDatosMenu(),
+      initialData: [],
+      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+        return ListView(children: _listadoMenu(snapshot.data));
+      },
+    );
   }
 
-  List<Widget> _listadoMenu() {
+  List<Widget> _listadoMenu(List<dynamic> listado) {
     return listado
-        .map((e) => Column(
+        .map((item) => Column(
               children: <Widget>[
                 ListTile(
-                  title: Text(e),
+                  title: Text(item['texto']),
                   subtitle: Text('Subtitulo'),
-                  leading: Icon(
-                      Icons.access_time), //leading es un elemento al inicio
+                  leading:
+                      getIcon(item['icon']), //leading es un elemento al inicio
                   trailing: Icon(Icons.keyboard_arrow_right),
                   onTap: () => {},
                 ),

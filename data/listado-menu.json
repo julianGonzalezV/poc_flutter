@@ -4,22 +4,22 @@
         {
             "opcion": "whatch",
             "icon": "watch_counter",
-            "texto": "1 Conteo de clics"
+            "texto": "1. Conteo de clics"
         },
         {
             "opcion": "alert",
             "icon": "add_alert",
-            "texto": "2 Alertas"
+            "texto": "2. Alertas"
         },
         {
             "opcion": "avatar",
             "icon": "accessibility",
-            "texto": "3 Avatars"
+            "texto": "3. Avatars"
         },
         {
             "opcion": "card",
             "icon": "folder_open",
-            "texto": "3 Tarjetas(Flutter Cards)"
+            "texto": "4. Cards"
         }
     ]
 }

@@ -5,15 +5,19 @@ import 'package:flutter/services.dart' show rootBundle;
 // _ antes del nombre de la clase para no exponerlo al mundo exterior
 class _MenuProvider {
   List<dynamic> opciones = [];
-  _MenuProvider() {
-    _cargarMenu();
-  }
 
-  void _cargarMenu() {
-    rootBundle.loadString('data/listado-menu.json').then((datos) {
-      Map datosMap = json.decode(datos);
-      print('Map $datosMap');
-    });
+  _MenuProvider() {}
+
+  /// _cargarMenu
+  /// Se realiza cambio a async dado que cuando se llamaba desde home_page
+  /// continuaba el computo y no llenaba las opciones del menu
+  Future<List<dynamic>> cargarDatosMenu() async {
+    final loadResponse = await rootBundle.loadString('data/listado-menu.json');
+    Map datosMap = json.decode(loadResponse);
+    print('Map $datosMap');
+    opciones = datosMap[
+        'opciones']; //opciones es el key del json en data/listado-menu.json
+    return opciones;
   }
 }
 
