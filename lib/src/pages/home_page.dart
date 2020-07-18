@@ -45,9 +45,7 @@ class HomePage extends StatelessWidget {
                       getIcon(item['icon']), //leading es un elemento al inicio
                   trailing: Icon(Icons.keyboard_arrow_right),
                   onTap: () {
-                    final ruta = MaterialPageRoute(
-                        builder: (context) => EjemploAlerta());
-                    Navigator.push(context, ruta);
+                    Navigator.pushNamed(context, item['ruta']);
                   },
                 ),
                 Divider()

@@ -2,17 +2,17 @@
     "appName":"PruebaConcepto",
     "opciones": [
         {
-            "opcion": "whatch",
+            "ruta": "whatch",
             "icon": "watch_counter",
             "texto": "1. Conteo de clics"
         },
         {
-            "opcion": "alert",
+            "ruta": "alert",
             "icon": "add_alert",
             "texto": "2. Alertas"
         },
         {
-            "opcion": "avatar",
+            "ruta": "avatar",
             "icon": "accessibility",
             "texto": "3. Avatars"
         },
