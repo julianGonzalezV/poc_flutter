@@ -9,8 +9,10 @@ class EjemploInputsState extends State<EjemploInputs> {
   String _nombre = '';
   String _email = '';
   String _password = '';
+  String _fecha = '';
+  TextEditingController _inputFechaCtr = new TextEditingController();
 
-  Widget _crearInput() {
+  Widget _input() {
     return TextField(
       //autofocus: true, para que aparezca el teclado de una
       textCapitalization: TextCapitalization.sentences,
@@ -30,7 +32,7 @@ class EjemploInputsState extends State<EjemploInputs> {
     );
   }
 
-  Widget _crearEmailInput() {
+  Widget _emailInput() {
     return TextField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
@@ -48,7 +50,7 @@ class EjemploInputsState extends State<EjemploInputs> {
     );
   }
 
-  Widget _crearPasswordInput() {
+  Widget _passwordInput() {
     return TextField(
       obscureText: true,
       decoration: InputDecoration(
@@ -66,10 +68,44 @@ class EjemploInputsState extends State<EjemploInputs> {
     );
   }
 
+  Widget _fechaInput(BuildContext context) {
+    return TextField(
+      controller: _inputFechaCtr,
+      enableInteractiveSelection: false,
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+          hintText: 'Fecha',
+          labelText: 'Fecha',
+          helperText: 'Seleccione una fecha',
+          suffixIcon: Icon(Icons.calendar_today),
+          icon: Icon(Icons.calendar_view_day)),
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusScopeNode());
+        _seleccionFecha(context);
+      },
+    );
+  }
+
   Widget _crearCliente() {
     return ListTile(
       title: Text('Nombre es: $_nombre'),
     );
+  }
+
+  _seleccionFecha(BuildContext context) async {
+    DateTime seleccion = await showDatePicker(
+      context: context,
+      initialDate: new DateTime.now(),
+      firstDate: new DateTime(2020),
+      lastDate: new DateTime(2025),
+      locale: Locale('es', 'ES'),
+    );
+    if (seleccion != null) {
+      setState(() {
+        _fecha = seleccion.toString();
+        _inputFechaCtr.text = _fecha;
+      });
+    }
   }
 
   @override
@@ -81,11 +117,13 @@ class EjemploInputsState extends State<EjemploInputs> {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 18.0),
         children: <Widget>[
-          _crearInput(),
+          _input(),
           Divider(),
-          _crearEmailInput(),
+          _emailInput(),
           Divider(),
-          _crearPasswordInput(),
+          _passwordInput(),
+          Divider(),
+          _fechaInput(context),
           Divider(),
           _crearCliente(),
           Divider(),

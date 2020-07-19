@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poc_flutter/src/pages/alert_page.dart';
 import 'package:poc_flutter/src/routes/routes.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class PruebaConcepto extends StatelessWidget {
   @override
@@ -9,6 +10,19 @@ class PruebaConcepto extends StatelessWidget {
     // use debugShowCheckedModeBanner:false
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        // ... app-specific localization delegate[s] here
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('es', 'ES'),
+        const Locale.fromSubtags(
+            languageCode: 'zh'), // Chinese *See Advanced Locales below*
+        // ... other locales the app supports
+      ],
       initialRoute: '/',
       routes: appRoutes(),
 
