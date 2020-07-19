@@ -10,6 +10,9 @@ class EjemploInputsState extends State<EjemploInputs> {
   String _email = '';
   String _password = '';
   String _fecha = '';
+  List<String> _listaItems = ['op1', 'op2', 'op3', 'op4'];
+  String _opSelec = 'op1';
+
   TextEditingController _inputFechaCtr = new TextEditingController();
 
   Widget _input() {
@@ -86,9 +89,36 @@ class EjemploInputsState extends State<EjemploInputs> {
     );
   }
 
-  Widget _crearCliente() {
-    return ListTile(
-      title: Text('Nombre es: $_nombre'),
+  List<DropdownMenuItem<String>> getListado() {
+    List<DropdownMenuItem<String>> l1 = new List();
+    _listaItems.forEach((e) {
+      l1.add(DropdownMenuItem(
+        value: e,
+        child: Text(e),
+      ));
+    });
+    return l1;
+  }
+
+  Widget _dropDownInput() {
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all),
+        SizedBox(
+          width: 30.0,
+        ),
+        Expanded(
+          child: DropdownButton(
+            value: _opSelec,
+            items: getListado(),
+            onChanged: (value) {
+              setState(() {
+                _opSelec = value;
+              });
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -108,6 +138,13 @@ class EjemploInputsState extends State<EjemploInputs> {
     }
   }
 
+  Widget _crearCliente() {
+    return ListTile(
+      title: Text('Nombre es: $_nombre'),
+      trailing: Text(_opSelec),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,6 +161,8 @@ class EjemploInputsState extends State<EjemploInputs> {
           _passwordInput(),
           Divider(),
           _fechaInput(context),
+          Divider(),
+          _dropDownInput(),
           Divider(),
           _crearCliente(),
           Divider(),
