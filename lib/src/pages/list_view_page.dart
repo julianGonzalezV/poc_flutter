@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class ListPage extends StatefulWidget {
@@ -10,6 +12,7 @@ class _ListPageState extends State<ListPage> {
       new ScrollController(); //Controlador del scroll de la lista
   List<int> _listaNumeros = new List();
   int _ultimo = 0;
+  bool _cargando = false;
 
   @override
   void initState() {
@@ -19,9 +22,33 @@ class _ListPageState extends State<ListPage> {
 
     _scrollCtr.addListener(() {
       if (_scrollCtr.position.pixels == _scrollCtr.position.maxScrollExtent) {
-        _agregarItems(10);
+        //_agregarItems(10);
+        fectchImages();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  Future fectchImages() async {
+    setState(() {
+      _cargando = true;
+    });
+    new Timer(Duration(seconds: 5),
+        respuestaHttp); //note como se llama a respuestaHttp sin () para no ejecutar la fución
+  }
+
+  void respuestaHttp() {
+    _cargando = false;
+    _agregarItems(10);
+    _scrollCtr.animateTo(
+      _scrollCtr.position.pixels + 100,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   void _agregarItems(int cantidad) {
@@ -47,6 +74,27 @@ class _ListPageState extends State<ListPage> {
     );
   }
 
+  Widget _loading() {
+    if (_cargando) {
+      return Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(),
+            ],
+          ),
+          SizedBox(
+            height: 15.0,
+          )
+        ],
+      );
+    } else
+      return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +102,12 @@ class _ListPageState extends State<ListPage> {
         title: Text('Lista'),
         centerTitle: true,
       ),
-      body: _listaWidget(context),
+      body: Stack(
+        children: <Widget>[
+          _listaWidget(context),
+          _loading(),
+        ],
+      ),
     );
   }
 }
