@@ -6,17 +6,42 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  List<int> _listaNumeros = [1, 2, 3, 4, 5, 6];
+  ScrollController _scrollCtr =
+      new ScrollController(); //Controlador del scroll de la lista
+  List<int> _listaNumeros = new List();
+  int _ultimo = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    print('initSate => $_ultimo');
+    _agregarItems(10);
+
+    _scrollCtr.addListener(() {
+      if (_scrollCtr.position.pixels == _scrollCtr.position.maxScrollExtent) {
+        _agregarItems(10);
+      }
+    });
+  }
+
+  void _agregarItems(int cantidad) {
+    for (var i = 0; i < cantidad; i++) {
+      _ultimo++;
+      print('agregando => $_ultimo');
+      _listaNumeros.add(_ultimo);
+    }
+    setState(() {});
+  }
 
   Widget _listaWidget(BuildContext context) {
     return ListView.builder(
+      controller: _scrollCtr,
       itemCount: _listaNumeros.length,
       itemBuilder: (context, index) {
         final imagen = _listaNumeros[index];
         return FadeInImage(
           placeholder: AssetImage('assets/loader.gif'),
-          image: NetworkImage(
-              'https://picsum.photos/seed/picsum/200/300/?image=$imagen'),
+          image: NetworkImage('https://picsum.photos/500/300/?image=$imagen'),
         );
       },
     );
