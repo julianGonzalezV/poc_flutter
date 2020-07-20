@@ -24,7 +24,22 @@
         ,{
             "ruta": "inputs",
             "icon": "input",
-            "texto": "5. Campos de entrada (email, pd, date ..etc)"
+            "texto": "5. Campos de entrada"
+        }
+        ,{
+            "ruta": "slider",
+            "icon": "tune",
+            "texto": "6.Slider"
+        }
+        ,{
+            "ruta": "animated",
+            "icon": "donut_large",
+            "texto": "7. Contenedores animados"
+        }
+        ,{
+            "ruta": "list",
+            "icon": "list",
+            "texto": "8. Lista Widget"
         }
     ]
 }
