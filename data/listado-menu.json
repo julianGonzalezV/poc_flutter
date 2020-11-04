@@ -2,6 +2,11 @@
     "appName":"PruebaConcepto",
     "opciones": [
         {
+            "ruta": "settings",
+            "icon": "settings",
+            "texto": "0. Settings"
+        },
+        {
             "ruta": "whatch",
             "icon": "watch_counter",
             "texto": "1. Conteo de clics"

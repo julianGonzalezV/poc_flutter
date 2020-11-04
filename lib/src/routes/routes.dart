@@ -7,6 +7,7 @@ import 'package:poc_flutter/src/pages/contador_page.dart';
 import 'package:poc_flutter/src/pages/home_page.dart';
 import 'package:poc_flutter/src/pages/inputs_page.dart';
 import 'package:poc_flutter/src/pages/list_view_page.dart';
+import 'package:poc_flutter/src/pages/settings_page.dart';
 import 'package:poc_flutter/src/pages/slider_page.dart';
 
 Map<String, WidgetBuilder> appRoutes() {
@@ -20,5 +21,6 @@ Map<String, WidgetBuilder> appRoutes() {
     'slider': (BuildContext context) => SliderPage(),
     'animated': (BuildContext context) => AnimatedPage(),
     'list': (BuildContext context) => ListPage(),
+    'settings': (BuildContext context) => SettingsPage(),
   };
 }

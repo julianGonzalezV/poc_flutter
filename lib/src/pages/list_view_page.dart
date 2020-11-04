@@ -60,17 +60,30 @@ class _ListPageState extends State<ListPage> {
     setState(() {});
   }
 
+  Future _refrescarPagina() async {
+    final Duration duration = new Duration(seconds: 3);
+    new Timer(duration, () {
+      _listaNumeros.clear();
+      _ultimo++;
+      _agregarItems(10);
+    });
+    return Future.delayed(duration);
+  }
+
   Widget _listaWidget(BuildContext context) {
-    return ListView.builder(
-      controller: _scrollCtr,
-      itemCount: _listaNumeros.length,
-      itemBuilder: (context, index) {
-        final imagen = _listaNumeros[index];
-        return FadeInImage(
-          placeholder: AssetImage('assets/loader.gif'),
-          image: NetworkImage('https://picsum.photos/500/300/?image=$imagen'),
-        );
-      },
+    return RefreshIndicator(
+      onRefresh: _refrescarPagina,
+      child: ListView.builder(
+        controller: _scrollCtr,
+        itemCount: _listaNumeros.length,
+        itemBuilder: (context, index) {
+          final imagen = _listaNumeros[index];
+          return FadeInImage(
+            placeholder: AssetImage('assets/loader.gif'),
+            image: NetworkImage('https://picsum.photos/500/300/?image=$imagen'),
+          );
+        },
+      ),
     );
   }
 

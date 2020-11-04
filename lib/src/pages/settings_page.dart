@@ -3,7 +3,7 @@ import 'package:poc_flutter/src/providers/menu_provider.dart';
 import 'package:poc_flutter/src/util/icon_str.dart';
 import 'package:poc_flutter/src/widgets/menu_widget.dart';
 
-class HomePage extends StatelessWidget {
+class SettingsPage extends StatelessWidget {
   final TextStyle estiloTexto = new TextStyle(fontSize: 30);
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,47 @@ class HomePage extends StatelessWidget {
     // and drawers(lateral Menu)
     return Scaffold(
       appBar: AppBar(
-        title: Text('Prueba de concepto'),
+        title: Text('Ajustes'),
         centerTitle: true,
       ),
       drawer: MenuWidget(_lista()),
-      body: _lista(),
+      body: _settingsBody(),
+    );
+  }
+
+  Widget _settingsBody() {
+    return ListView(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(20.0),
+          child: Text(
+            'Settings',
+            style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Divider(),
+        SwitchListTile(
+            value: true, title: Text('Color'), onChanged: (boolValue) {}),
+        RadioListTile(
+            value: 1,
+            title: Text('Masculino'),
+            groupValue: 1,
+            onChanged: (intValue) {}),
+        RadioListTile(
+            value: 1,
+            title: Text('Femenino'),
+            groupValue: 1,
+            onChanged: (intValue) {}),
+        Divider(),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 35.0),
+          child: TextField(
+            decoration: InputDecoration(
+                labelText: 'Nombre', helperText: 'agrega tu nombre'),
+            onChanged: (valueStr) {},
+          ),
+        )
+      ],
     );
   }
 
