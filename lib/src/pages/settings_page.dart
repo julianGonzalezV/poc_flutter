@@ -1,16 +1,50 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:poc_flutter/src/providers/menu_provider.dart';
 import 'package:poc_flutter/src/util/icon_str.dart';
 import 'package:poc_flutter/src/widgets/menu_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  //Definiendo variables que hacen que sea stateFul (widget que va a cambiar una vez construido!)
+
+  bool _colorS = false;
+  int _gender = 1;
+  String _name = "JUli";
+
   final TextStyle estiloTexto = new TextStyle(fontSize: 30);
+// En este caso se usa para colocar valor por defecto pero tambien se usa para
+// contener estado que es diferente al ciclo de vida del componente(en este cao inputField)
+  TextEditingController _nameCtr = new TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _getPreferences();
+    _nameCtr = new TextEditingController(text: _name);
+  }
+
+  _getPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _gender = prefs.get('gender');
+    setState(() {});
+  }
+
+  _setGenderSelected(int value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _gender = value;
+    await prefs.setInt('gender', value);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Flutter io : Saffold is an elemente that full
-    // all the cel display and allows adding an appBar(header)
-    // and bottomBar(footer)
-    // and drawers(lateral Menu)
     return Scaffold(
       appBar: AppBar(
         title: Text('Ajustes'),
@@ -27,30 +61,43 @@ class SettingsPage extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(20.0),
           child: Text(
-            'Settings',
+            'Ajustes',
             style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold),
           ),
         ),
         Divider(),
         SwitchListTile(
-            value: true, title: Text('Color'), onChanged: (boolValue) {}),
+            value: _colorS,
+            title: Text('Color'),
+            onChanged: (boolValue) {
+              setState(() {
+                _colorS = boolValue;
+              });
+            }),
         RadioListTile(
-            value: 1,
+            value: 0,
             title: Text('Masculino'),
-            groupValue: 1,
-            onChanged: (intValue) {}),
+            groupValue: _gender,
+            onChanged: _setGenderSelected),
         RadioListTile(
             value: 1,
             title: Text('Femenino'),
-            groupValue: 1,
-            onChanged: (intValue) {}),
+            groupValue: _gender,
+            onChanged: _setGenderSelected),
         Divider(),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 35.0),
           child: TextField(
+            controller: _nameCtr,
             decoration: InputDecoration(
-                labelText: 'Nombre', helperText: 'agrega tu nombre'),
-            onChanged: (valueStr) {},
+              labelText: 'Nombre',
+              helperText: 'agrega tu nombre',
+            ),
+            onChanged: (valueStr) {
+              setState(() {
+                _name = valueStr;
+              });
+            },
           ),
         )
       ],
