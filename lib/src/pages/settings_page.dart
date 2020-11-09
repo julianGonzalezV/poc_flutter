@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:poc_flutter/src/providers/menu_provider.dart';
+import 'package:poc_flutter/src/share_prefs/user_preference.dart';
 import 'package:poc_flutter/src/util/icon_str.dart';
 import 'package:poc_flutter/src/widgets/menu_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,11 +11,13 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final prefs = new UserPreference();
+
   //Definiendo variables que hacen que sea stateFul (widget que va a cambiar una vez construido!)
 
-  bool _colorS = false;
-  int _gender = 1;
-  String _name = "JUli";
+  bool _colorS;
+  int _gender;
+  String _name;
 
   final TextStyle estiloTexto = new TextStyle(fontSize: 30);
 // En este caso se usa para colocar valor por defecto pero tambien se usa para
@@ -26,20 +27,28 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
-    _getPreferences();
+    _colorS = prefs.color;
+    _gender = prefs.gender;
+    _name = prefs.name;
     _nameCtr = new TextEditingController(text: _name);
   }
 
-  _getPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _gender = prefs.get('gender');
+  _setGenderSelected(int value) async {
+    prefs.gender = value;
+    print('_setGenderSelected $value');
+    _gender = value;
     setState(() {});
   }
 
-  _setGenderSelected(int value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _gender = value;
-    await prefs.setInt('gender', value);
+  _setColorSelected(bool value) async {
+    prefs.color = value;
+    _colorS = value;
+    setState(() {});
+  }
+
+  _setName(String value) async {
+    prefs.name = value;
+    _name = value;
     setState(() {});
   }
 
@@ -47,6 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: prefs.color ? Colors.teal : Colors.blue,
         title: Text('Ajustes'),
         centerTitle: true,
       ),
@@ -67,13 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         Divider(),
         SwitchListTile(
-            value: _colorS,
-            title: Text('Color'),
-            onChanged: (boolValue) {
-              setState(() {
-                _colorS = boolValue;
-              });
-            }),
+            value: _colorS, title: Text('Color'), onChanged: _setColorSelected),
         RadioListTile(
             value: 0,
             title: Text('Masculino'),
@@ -93,11 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
               labelText: 'Nombre',
               helperText: 'agrega tu nombre',
             ),
-            onChanged: (valueStr) {
-              setState(() {
-                _name = valueStr;
-              });
-            },
+            onChanged: _setName,
           ),
         )
       ],

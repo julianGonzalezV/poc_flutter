@@ -7,44 +7,49 @@
             "texto": "0. Settings"
         },
         {
+            "ruta": "view_settings",
+            "icon": "settings",
+            "texto": "1. View settings"
+        },
+        {
             "ruta": "whatch",
             "icon": "watch_counter",
-            "texto": "1. Conteo de clics"
+            "texto": "2. Conteo de clics"
         },
         {
             "ruta": "alert",
             "icon": "add_alert",
-            "texto": "2. Alertas"
+            "texto": "3. Alertas"
         },
         {
             "ruta": "avatar",
             "icon": "accessibility",
-            "texto": "3. Avatars"
+            "texto": "4. Avatars"
         },
         {
             "ruta": "card",
             "icon": "folder_open",
-            "texto": "4. Tarjetas"
+            "texto": "5. Tarjetas"
         }
         ,{
             "ruta": "inputs",
             "icon": "input",
-            "texto": "5. Campos de entrada"
+            "texto": "6. Campos de entrada"
         }
         ,{
             "ruta": "slider",
             "icon": "tune",
-            "texto": "6.Slider"
+            "texto": "7.Slider"
         }
         ,{
             "ruta": "animated",
             "icon": "donut_large",
-            "texto": "7. Contenedores animados"
+            "texto": "8. Contenedores animados"
         }
         ,{
             "ruta": "list",
             "icon": "list",
-            "texto": "8. Lista Widget"
+            "texto": "9. Lista Widget"
         }
     ]
 }

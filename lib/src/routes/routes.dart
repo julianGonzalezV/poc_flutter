@@ -9,6 +9,7 @@ import 'package:poc_flutter/src/pages/inputs_page.dart';
 import 'package:poc_flutter/src/pages/list_view_page.dart';
 import 'package:poc_flutter/src/pages/settings_page.dart';
 import 'package:poc_flutter/src/pages/slider_page.dart';
+import 'package:poc_flutter/src/pages/user_preference.dart';
 
 Map<String, WidgetBuilder> appRoutes() {
   return <String, WidgetBuilder>{
@@ -22,5 +23,6 @@ Map<String, WidgetBuilder> appRoutes() {
     'animated': (BuildContext context) => AnimatedPage(),
     'list': (BuildContext context) => ListPage(),
     'settings': (BuildContext context) => SettingsPage(),
+    'view_settings': (BuildContext context) => UserPreferencePage(),
   };
 }
